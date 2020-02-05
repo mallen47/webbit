@@ -31,11 +31,20 @@ gem 'mini_magick', '>= 4.10.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+
+
+### webbit Gems ###
 # User authentication
 gem 'devise', '~> 4.7', '>= 4.7.1'
 
 # Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends
 gem 'carrierwave', '>= 2.0.2'
+
+# Validate URL
+gem 'valid_url', '~> 0.0.4'
+
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

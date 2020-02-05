@@ -1,7 +1,7 @@
-class SubmissionImageUploader < CarrierWave::Uploader::Base
+class SubmissionVideoUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -29,18 +29,14 @@ class SubmissionImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
-    process resize_to_fit: [50, 50]
-  end
-
-  version :large do
-    process resize_to_fit: [800, 800]
-  end
+  # version :thumb do
+  #   process resize_to_fit: [50, 50]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w(mp4 webm ogv)
   end
 
   # Override the filename of the uploaded files:
