@@ -1,16 +1,45 @@
 document.addEventListener("turbolinks:load", () => {
-  const dropdown = document.querySelector(".js-dropdown-user-target");
-  const dropdownList = document.querySelector(".dropdown-list");
+  function dropdown() {
+    console.log("inside dropdown() function")
+    const dropDownLinks = document.querySelectorAll('.js-nav .dropdown a');
+    const dropDownMenu = document.querySelector('.dropdown-menu');
 
-  dropdown.addEventListener("click", (e) => e.preventDefault());
+    dropDownLinks.forEach(function(dropdown) {
+      dropdown.addEventListener('click', function(e) {
+        const dropdownTarget = this.nextElementSibling
 
-  document.addEventListener("click", (e) => {
-    if(e.target.closest(".dropdown")) {
-      // hide dropdown if click target is the dropdown element
-      dropdownList.classList.remove("hidden");
-    } else {
-      // remove dropdown if no target is the dropdown element
-      dropdownList.classList.add("hidden");
+        if(e.target.nextElementSibling != null) {
+          // Hide the dropdown
+          dropdownTarget.classList.toggle('hidden');
+          // Click outside the dropdown to close also
+          hideOnClickOutside(this);
+          e.preventDefault();
+        }
+      });
+    });
+  }
+
+  function hideOnClickOutside(element) {
+    const outsideClickListener = function(event) {
+      if(!element.contains(event.target)) {
+        if(!!element && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length)) {
+          element.nextElementSibling.classList.toggle('hidden');
+          removeClickListener();
+        }
+      }
     }
-  });
+
+    const removeClickListener = function() {
+      document.removeEventListener('click', outsideClickListener);
+    }
+    document.addEventListener('click', outsideClickListener);
+  }
+
+  function init() {
+    console.log("initing!")
+    dropdown();
+  }
+
+  init();
+
 });
