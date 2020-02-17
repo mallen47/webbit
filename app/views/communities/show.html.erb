@@ -1,26 +1,19 @@
-<% content_for :community_label, @community.name %>
+<% content_for :community_label, "w/#{@community.name}" %>
 
-<p id="notice"><%= notice %></p>
+<div class="bg-purple-600 text-white">
+  <div class="container lg:p-10 p-4">
+    <h1 class="lg:text-3xl text-lg">w/<%= @community.name %></h1>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @community.name %>
-</p>
+<% content_for :primary_content do %>
+  <% @community.submissions.each do |community| %>
+    <%= render 'submissions/submission', submission: community %>
+  <% end %>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @community.title %>
-</p>
+<% content_for :secondary_content do %>
+    <%= render 'sidebar', community: @community %>
+<% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @community.description %>
-</p>
-
-<p>
-  <strong>Sidebar:</strong>
-  <%= @community.sidebar %>
-</p>
-
-<%= link_to 'Edit', edit_community_path(@community) %> |
-<%= link_to 'Back', communities_path %>
+<%= render 'basic_layout' %>

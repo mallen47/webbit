@@ -1,35 +1,42 @@
 <% content_for :community_label, "All Communities" %>
 
-<p id="notice"><%= notice %></p>
-
-<h1>Communities</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Sidebar</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<% content_for :primary_content do %>
+  <div class="lg:p-10 pt-10 pb-10 px-4">
+    <h1 class="text-xl font-normal mb-6">Communities</h1>
     <% @communities.each do |community| %>
-      <tr>
-        <td><%= community.name %></td>
-        <td><%= community.title %></td>
-        <td><%= community.description %></td>
-        <td><%= community.sidebar %></td>
-        <td><%= link_to 'Show', community %></td>
-        <td><%= link_to 'Edit', edit_community_path(community) %></td>
-        <td><%= link_to 'Destroy', community, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="card flex flex-wrap items-center justify-between px-4 py-2">
+        <div class="flex-1">
+           <%= link_to community, class:"no-underline text-gray-700" do %>
+            <p class="m-0 leading-tight">
+              <span class="text-xs no-underline inline-flex items-center text-gray-600">
+                <%= render_svg 'icons/conversation', styles: "w-3 fill-current text-gray-500 mr-1" %> w/<%= community.name %>
+              </span>
+            </p>
+            <h3 class="m-0 leading-tight text-base"><%= community.title %><h3>
+          <% end %>
+        </div>
+        <div class="text-xs font-normal">
+          <%= link_to community, class: "no-underline mr-2" do %>
+            <%= render_svg 'icons/view', styles: "w-4 fill-current text-gray-500", title: "View" %>
+          <% end %>
+
+          <%= link_to edit_community_path(community), class: "no-underline mr-2" do %>
+            <%= render_svg 'icons/edit', styles: "w-4 fill-current text-gray-500", title: "Edit" %>
+          <% end %>
+
+          <%= link_to community, class: "no-underline", method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= render_svg 'icons/delete', styles: "w-4 fill-current text-gray-500", title: "Delete" %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
-<br>
+<% content_for :secondary_content do %>
+  <div class="px-8 pt-6 pb-8">
+    <%= link_to 'New Community', new_community_path %>
+  </div>
+<% end %>
 
-<%= link_to 'New Community', new_community_path %>
+<%= render "basic_layout" %>
