@@ -1,3 +1,19 @@
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
 .list {
-	list-style: decimal inside;
+  list-style: decimal inside;
+}
+
+.submission-voting {
+  width: 40px;
+}
+
+.submission-content {
+  width: calc(100% - 40px);
 }

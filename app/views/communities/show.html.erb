@@ -1,10 +1,6 @@
 <% content_for :community_label, "w/#{@community.name}" %>
 
-<div class="bg-purple-600 text-white">
-  <div class="container lg:p-10 p-4">
-    <h1 class="lg:text-3xl text-lg">w/<%= @community.name %></h1>
-  </div>
-</div>
+<%= render 'community_header', community: @community %>
 
 <% content_for :primary_content do %>
   <% @community.submissions.each do |community| %>
@@ -13,7 +9,7 @@
 <% end %>
 
 <% content_for :secondary_content do %>
-    <%= render 'sidebar', community: @community %>
+  <%= render 'sidebar', community: @community %>
 <% end %>
 
 <%= render 'basic_layout' %>

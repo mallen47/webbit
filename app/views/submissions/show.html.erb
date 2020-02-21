@@ -1,21 +1,38 @@
 <% content_for :community_label, @submission.community.name %>
 
-<p id="notice"><%= notice %></p>
+<%= render 'communities/community_header', community: @submission.community %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @submission.title %>
-</p>
+<%= content_for :primary_content do %>
+  <div class="p-4 pb-10 pr-6">
+    <div class="flex flex-row flex-wrap items-start justify-between">
 
-<p>
-  <strong>Body:</strong>
-  <%= @submission.body %>
-</p>
+      <div class="submission-voting text-xs pr-2">
+        <%= render 'voting' %>
+      </div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @submission.url %>
-</p>
+      <div class="submission-content">
+        <%= render 'posted_by', submission: @submission %>
 
-<%= link_to 'Edit', edit_submission_path(@submission) %> |
-<%= link_to 'Back', submissions_path %>
+        <h1 class="text-xl"><%= @submission.title %></h1>
+
+        <div class="leading-normal text-base lg:pr-6 mb-5">
+          <%= @submission.body %>
+        </div>
+
+        <%= render 'actions', submission: @submission %>
+
+        <% unless user_signed_in? %>
+          <p class="text-sm text-gray-600 my-2"><%= link_to "Login", new_user_session_path, class: "link" %> or <%= link_to "Sign up", new_user_registration_path, class: "link" %> to comment.</p>
+        <% else %>
+          <# TODO: Add Comments %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= content_for :secondary_content do %>
+  <%= render 'communities/sidebar', community: @submission.community %>
+<% end %>
+
+<%= render 'basic_layout' %>
