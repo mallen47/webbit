@@ -16,15 +16,26 @@ class CommentsController < ApplicationController
 			if @comment.save
 				format.html { redirect_to submission_path(@submission)}
 				format.js
+				format.json { render json: @comment, 
+					                   status: :created, 
+					                   location: @comment }
 			else
 				format.html { redirect_to submission_path(@submission), 
-					            notice: "Your comments were not saved. Please try again."}
+					            notice: "Your comments were not saved. Please try again." }
 				format.js
+				format.json { render json: @comment.errors, 
+					                   status: :unprocessable_entity }
 			end
 		end
 	end
 
+	def show
+	end
+
 	def edit
+		respond_to do |format|
+			format.js  # renders edit.js.erb (ajax)
+		end
 	end
 
 	def update
@@ -35,7 +46,7 @@ class CommentsController < ApplicationController
 			else
 				format.html { render :edit }
 				format.json { render json: @comment_errors, 
-					            status: unprocessable_entity }
+					            status: :unprocessable_entity }
 			end
 		end
 	end
@@ -49,7 +60,7 @@ class CommentsController < ApplicationController
 
 		def set_submission
 			@submission = Submission.find(params[:submission_id])
-			redirect_to submission_path(@submission)
+			# redirect_to submission_path(@submission)  //this line is not found in module 9 AJAX comments 
 		end
 
 		def set_comment

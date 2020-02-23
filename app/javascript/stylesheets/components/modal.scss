@@ -1,0 +1,29 @@
+.modal {
+  bottom: 0;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  width: 100vw;
+  z-index: 999;
+
+  &.is-active {
+    animation-duration: .3s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+    background: rgba(255, 255, 255, .9);
+    visibility: visible;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
