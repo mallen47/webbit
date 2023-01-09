@@ -44,7 +44,7 @@ gem 'carrierwave', '>= 2.0.2'
 gem 'valid_url', '~> 0.0.4'
 
 # Vector graphics
-gem 'inline_svg', '~> 1.6'
+gem 'inline_svg', '~> 1.7'
 
 
 group :development, :test do
